@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c1jmdqc2uivh0"]
+
+[node name="bread" type="RigidBody2D" unique_id=83652166]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=912757825]
