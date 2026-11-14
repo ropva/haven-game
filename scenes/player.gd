@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
+const BREAD = preload("res://scenes/bread.tscn")
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+signal shoot_bread
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -23,3 +25,12 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("shoot"):
+		shoot()
+
+func shoot():
+	var new_bread: CharacterBody2D = BREAD.instantiate()
+	shoot_bread.emit(new_bread)
+	new_bread.global_position = global_position + Vector2()
