@@ -38,7 +38,14 @@ func _check_bounce_tile() -> void:
 	if data and data.get_custom_data("bouncy"):
 		velocity.y = JUMP_VELOCITY*float(data.get_custom_data("bounce_mult"))
 		tile_map_layer.press_tile(coords)
-
+		return
+	var head := global_position - Vector2(0, 8)
+	coords = tile_map_layer.local_to_map(tile_map_layer.to_local(head))
+	data = tile_map_layer.get_cell_tile_data(coords)
+	if data and data.get_custom_data("bouncy"):
+		velocity.y = JUMP_VELOCITY*float(data.get_custom_data("bounce_mult"))
+		tile_map_layer.press_tile(coords)
+		return
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		shoot()

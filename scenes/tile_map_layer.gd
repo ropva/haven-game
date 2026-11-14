@@ -1,6 +1,7 @@
 extends TileMapLayer
 
 @export var pressed_atlas_coords := {
+	-1.0: Vector2i(8, 1),
 	1.5: Vector2i(7, 1),
 	1.0: Vector2i(6, 1)
 }
