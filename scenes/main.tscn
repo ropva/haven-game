@@ -485,4 +485,5 @@ tile_map_layer = NodePath("../TileMapLayer")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=494526020]
 unique_name_in_owner = true
+visible = false
 color = Color(0.32915878, 0.32915825, 0.32915848, 1)
