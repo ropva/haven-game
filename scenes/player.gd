@@ -45,5 +45,6 @@ func _input(event: InputEvent) -> void:
 
 func shoot():
 	var new_bread: CharacterBody2D = BREAD.instantiate()
+	new_bread.tile_map_layer = tile_map_layer
 	shoot_bread.emit(new_bread)
 	new_bread.global_position = global_position + Vector2()
