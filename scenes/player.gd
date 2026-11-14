@@ -2,10 +2,13 @@ extends CharacterBody2D
 
 const BREAD = preload("res://scenes/bread.tscn")
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+@export var tile_map_layer: TileMapLayer
+
+const SPEED = 400.0
+const JUMP_VELOCITY = -600.0
 
 signal shoot_bread
+signal jump_pad_activated
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -13,7 +16,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if (Input.is_action_just_pressed("ui_accept") and is_on_floor()):
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
@@ -22,9 +25,19 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = velocity.x * 0.7 if is_on_floor() else velocity.x * 0.99
 
 	move_and_slide()
+	
+	_check_bounce_tile()
+
+func _check_bounce_tile() -> void:
+	var feet := global_position + Vector2(0, 8)
+	var coords := tile_map_layer.local_to_map(tile_map_layer.to_local(feet))
+	var data := tile_map_layer.get_cell_tile_data(coords)
+	if data and data.get_custom_data("bouncy"):
+		velocity.y = JUMP_VELOCITY
+		tile_map_layer.press_tile(coords)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
