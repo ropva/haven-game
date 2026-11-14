@@ -16,7 +16,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if collision_count >= 10: queue_free()
 	direction *= Vector2(1, randf_range(0.9997, 1.0002))
-	direction -= Vector2(0, -0.1)
+	direction -= Vector2(0, -0.08)
 	var collision = move_and_collide(direction * speed * delta)
 	if collision:
 		collision_count += 0.5

@@ -13,6 +13,7 @@ config_version=5
 config/name="haven-game"
 run/main_scene="uid://ccy3nufcpah6b"
 config/features=PackedStringArray("4.7", "Mobile")
+boot_splash/bg_color=Color(0.60391915, 0.7636565, 1, 1)
 config/icon="res://icon.svg"
 
 [display]
@@ -37,3 +38,4 @@ shoot={
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.6039216, 0.7647059, 1, 1)
