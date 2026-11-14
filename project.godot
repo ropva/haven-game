@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.7", "Mobile")
 boot_splash/bg_color=Color(0.60391915, 0.7636565, 1, 1)
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*uid://b01k6j2fhpdpq"
+
 [display]
 
 window/stretch/mode="canvas_items"

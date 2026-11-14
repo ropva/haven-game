@@ -20,6 +20,7 @@ func _process(delta: float) -> void:
 		%CanvasModulate.visible=true;
 		%TimerLabel.visible=false;
 		%EndGameLabel.visible=true;
+		Global.has_ended=true;
 	pass
 	
 	
