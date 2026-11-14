@@ -485,8 +485,6 @@ script = ExtResource("3_tbgi4")
 unique_name_in_owner = true
 tile_map_layer = NodePath("../TileMapLayer")
 
-[node name="bread" parent="." unique_id=1170265474 instance=ExtResource("2_0wfyh")]
-
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=494526020]
 unique_name_in_owner = true
 visible = false
