@@ -1,5 +1,10 @@
 [gd_scene format=3 uid="uid://c1jmdqc2uivh0"]
 
+[ext_resource type="Texture2D" uid="uid://cfmct0hautrmw" path="res://res/bread.png" id="1_svkq2"]
+
 [node name="bread" type="RigidBody2D" unique_id=83652166]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=343389894]
+texture = ExtResource("1_svkq2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=912757825]
