@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction = 0 if(Global.has_ended) else Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED
 		if not shooting: $sprite.play("walk")
@@ -53,7 +53,7 @@ func _check_bounce_tile() -> void:
 		tile_map_layer.press_tile(coords)
 		return
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
+	if event.is_action_pressed("shoot") and not Global.has_ended:
 		shoot()
 
 func shoot():
