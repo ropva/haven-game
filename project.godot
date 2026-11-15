@@ -12,6 +12,7 @@ config_version=5
 
 config/name="haven-game"
 run/main_scene="uid://ccy3nufcpah6b"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.7", "Mobile")
 boot_splash/bg_color=Color(0.60391915, 0.7636565, 1, 1)
 config/icon="res://icon.svg"

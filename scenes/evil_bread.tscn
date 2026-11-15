@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://befvl2c6qkal"]
+
+[ext_resource type="Script" uid="uid://b63wqmbt51c31" path="res://scenes/bread.gd" id="1_y70hy"]
+[ext_resource type="Texture2D" uid="uid://cfnly2dwhjqp" path="res://res/bad_bread.png" id="2_tysgp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ihbfu"]
+radius = 7.0
+
+[node name="evil_bread" type="CharacterBody2D" unique_id=1170265474]
+collision_layer = 2
+script = ExtResource("1_y70hy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=343389894]
+unique_name_in_owner = true
+texture = ExtResource("2_tysgp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=912757825]
+shape = SubResource("CircleShape2D_ihbfu")
