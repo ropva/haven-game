@@ -19,6 +19,15 @@ func _ready() -> void:
 	$enemy2.shoot_bread.connect(func(b): 
 		add_child(b)
 	)
+	$enemy3.shoot_bread.connect(func(b): 
+		add_child(b)
+	)
+	$enemy4.shoot_bread.connect(func(b): 
+		add_child(b)
+	)
+	$enemy5.shoot_bread.connect(func(b): 
+		add_child(b)
+	)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

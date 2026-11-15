@@ -61,8 +61,8 @@ func shoot():
 	var new_bread: CharacterBody2D = BREAD.instantiate()
 	new_bread.tile_map_layer = tile_map_layer
 	shoot_bread.emit(new_bread)
-	new_bread.global_position = Vector2(global_position )+(Vector2(3,3) * (1 if ($sprite.flip_h) else -1))
-	new_bread.direction = (Vector2(1*(1 if ($sprite.flip_h) else -1),1))
+	new_bread.global_position = Vector2(global_position )+(Vector2(3,3) * (-1 if ($sprite.flip_h) else 1))
+	new_bread.direction = (Vector2((1 if ($sprite.flip_h) else -1),1))
 	$sprite.play("shoot")
 	$sprite.animation_looped.connect(
 		func():

@@ -15,7 +15,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if collision_count >= 16: queue_free()
+	if collision_count >= 10: queue_free()
 	direction *= Vector2(1, randf_range(0.9997, 1.0002))
 	direction -= Vector2(0, -0.08)
 	var collision = move_and_collide(direction * speed * delta)
