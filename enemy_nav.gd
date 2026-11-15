@@ -12,7 +12,6 @@ var id_of: Dictionary = {}    # Vector2i -> int
 var cell_of: Dictionary = {}  # int -> Vector2i
 var edge_info: Dictionary = {} # Vector2i(from_id, to_id) -> {type, dir}
 
-# These must match the enemy's real movement values
 var speed: float
 var gravity: float
 var jump_velocity: float
@@ -23,7 +22,6 @@ func _is_bouncy(c: Vector2i) -> bool:
 
 func _is_solid(c: Vector2i) -> bool:
 	var d := layer.get_cell_tile_data(c)
-	# Solid = has collision and isn't a jump pad. Adjust to your tileset.
 	return d != null and not d.get_custom_data("bouncy") \
 		and d.get_collision_polygons_count(0) > 0
 
@@ -99,11 +97,9 @@ func _simulate_launch(pad_cell: Vector2i, dir: int, vy: float) -> Vector2i:
 		if _is_solid(layer.local_to_map(Vector2(next.x, pos.y))):
 			vel.x = 0.0
 			next.x = pos.x
-		# ceiling: kill upward movement
 		if vel.y < 0.0 and _is_solid(layer.local_to_map(Vector2(next.x, next.y - 8))):
 			vel.y = 0.0
 			next.y = pos.y
-		# landing
 		if vel.y > 0.0:
 			var feet_cell := layer.local_to_map(Vector2(next.x, next.y + 8))
 			if _is_solid(feet_cell):

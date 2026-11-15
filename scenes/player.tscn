@@ -88,5 +88,6 @@ offset_right = 15.370371
 offset_bottom = -19.0
 theme_override_styles/background = SubResource("StyleBoxFlat_g2els")
 theme_override_styles/fill = SubResource("StyleBoxFlat_qhqgy")
+max_value = 500.0
 value = 50.0
 show_percentage = false

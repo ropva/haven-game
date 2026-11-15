@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dj8iqucoe0cdt" path="res://res/child.png" id="2_4gyqm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y0iyi"]
-height = 28.0
+height = 34.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qi2p4"]
 atlas = ExtResource("2_4gyqm")
@@ -75,7 +75,7 @@ script = ExtResource("1_4gyqm")
 shape = SubResource("CapsuleShape2D_y0iyi")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1822829589]
-position = Vector2(3, -18)
+position = Vector2(3, -15)
 sprite_frames = SubResource("SpriteFrames_tbgi4")
 animation = &"shoot"
 

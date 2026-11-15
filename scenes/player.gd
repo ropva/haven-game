@@ -6,7 +6,7 @@ const BREAD = preload("res://scenes/bread.tscn")
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -600.0
-var health = 160
+var health = 500
 
 var shooting = false
 var bodyType = "player"
@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	
 	_check_bounce_tile()
 	
-	$Bar.value = health	
+	$Bar.value = health
 
 
 func _check_bounce_tile() -> void:

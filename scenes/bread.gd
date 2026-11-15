@@ -23,16 +23,17 @@ func _physics_process(delta: float) -> void:
 	direction -= Vector2(0, -0.08)
 	var collision = move_and_collide(direction * speed * delta)
 	if collision:
-		if (collision.get_collider() is CharacterBody2D):
+		if (collision.get_collider() is not TileMapLayer):
+			print(collision.get_collider().bodyType)
 			if(is_good and collision.get_collider().bodyType=="enemy"):
+				print(collision.get_collider().health)
 				collision.get_collider().health -= 5
 				if(collision.get_collider().health<=0):collision.get_collider().queue_free();
 			elif(not is_good and collision.get_collider().bodyType=="player"):
 				collision.get_collider().health -= 5
 				if(collision.get_collider().health<=0):	Global.has_ended=true
-
 			
-		collision_count += 0.5
+		collision_count += 1
 		direction = direction.bounce(collision.get_normal().rotated(randf_range(-0.01, 0.01)))
 		squish(collision.get_normal())
 	_check_bounce_tile()
