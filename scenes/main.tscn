@@ -4,6 +4,7 @@
 [ext_resource type="TileSet" uid="uid://fs78aljg5b3j" path="res://res/terrain_tileset.tres" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c2mq7cakvpexk" path="res://scenes/player.tscn" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://bb6u3anatrrnq" path="res://scenes/tile_map_layer.gd" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://dju5wv2mnvk42" path="res://enemy.tscn" id="5_tbgi4"]
 
 [node name="Main" type="Node2D" unique_id=1510547566]
 scale = Vector2(2, 2)
@@ -67,3 +68,8 @@ tile_map_layer = NodePath("../TileMapLayer")
 unique_name_in_owner = true
 visible = false
 color = Color(0.32915878, 0.32915825, 0.32915848, 1)
+
+[node name="enemy" parent="." unique_id=1948771556 node_paths=PackedStringArray("tile_map_layer", "player") instance=ExtResource("5_tbgi4")]
+position = Vector2(409.5, 1.5)
+tile_map_layer = NodePath("../TileMapLayer")
+player = NodePath("../player")
