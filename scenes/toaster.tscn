@@ -19,7 +19,7 @@ position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_w4yda")
 
 [node name="Timer" type="Timer" parent="." unique_id=750249360]
-wait_time = 3.0
+wait_time = 2.0
 autostart = true
 
 [node name="Bar" type="ProgressBar" parent="." unique_id=493720708]

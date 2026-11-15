@@ -28,13 +28,18 @@ func _physics_process(delta: float) -> void:
 	
 func shoot():
 	doShoot()
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.3).timeout
 	doShoot()
 	
 func doShoot():
 	shooting = true
 	var new_bread: CharacterBody2D = BREAD.instantiate()
 	new_bread.tile_map_layer = tile_map_layer
+	new_bread.global_position = Vector2(global_position ) + 20*(player.position-global_position).normalized() + Vector2(1,0)
+	new_bread.direction = (player.position-global_position).normalized()\
+	*  Vector2(randf_range(0.8, 1.2), randf_range(0.7, 1.2))
+	new_bread.speed = 750
+
 	shoot_bread.emit(new_bread)
 	new_bread.global_position = global_position + Vector2()	
 
