@@ -6,8 +6,10 @@ const BREAD = preload("res://scenes/bread.tscn")
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -600.0
+var health = 200
 
 var shooting = false
+var bodyType = "player"
 
 signal shoot_bread
 signal jump_pad_activated
@@ -36,6 +38,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	_check_bounce_tile()
+	
+	$Bar.value = health	
+
 
 func _check_bounce_tile() -> void:
 	var feet := global_position + Vector2(0, 8)

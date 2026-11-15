@@ -4,9 +4,12 @@ const INITIAL_SPEED: int = 500
 var speed: int = INITIAL_SPEED
 var direction: Vector2
 var collision_count = 0
+var bodyType = "bread"
+
 
 var squish_tween: Tween
 @export var tile_map_layer: TileMapLayer
+@export var is_good: bool
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +23,15 @@ func _physics_process(delta: float) -> void:
 	direction -= Vector2(0, -0.08)
 	var collision = move_and_collide(direction * speed * delta)
 	if collision:
+		if (collision.get_collider() is CharacterBody2D):
+			if(is_good and collision.get_collider().bodyType=="enemy"):
+				collision.get_collider().health -= 5
+				if(collision.get_collider().health<=0):collision.get_collider().queue_free();
+			elif(not is_good and collision.get_collider().bodyType=="player"):
+				collision.get_collider().health -= 5
+				if(collision.get_collider().health<=0):	Global.has_ended=true
+
+			
 		collision_count += 0.5
 		direction = direction.bounce(collision.get_normal().rotated(randf_range(-0.01, 0.01)))
 		squish(collision.get_normal())

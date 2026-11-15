@@ -53,6 +53,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2els"]
+bg_color = Color(1, 0.3400427, 0.30407533, 1)
+
 [node name="player" type="CharacterBody2D" unique_id=1054328299]
 script = ExtResource("1_3vyb7")
 
@@ -65,3 +68,13 @@ shape = SubResource("CapsuleShape2D_4gyqm")
 position = Vector2(3, -11)
 sprite_frames = SubResource("SpriteFrames_3vyb7")
 animation = &"shoot"
+
+[node name="Bar" type="ProgressBar" parent="." unique_id=1623039402]
+unique_name_in_owner = true
+offset_left = -16.0
+offset_top = -26.0
+offset_right = 15.370371
+offset_bottom = -19.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_g2els")
+value = 50.0
+show_percentage = false
