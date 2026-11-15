@@ -24,8 +24,10 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED
+		$sprite.play("walk")
 	else:
 		velocity.x = velocity.x * 0.7 if is_on_floor() else velocity.x * 0.99
+		$sprite.play("default")
 
 	move_and_slide()
 	
