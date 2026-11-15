@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://c2mq7cakvpexk"]
+
+[ext_resource type="Script" uid="uid://dos3bako6i6tt" path="res://scenes/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://cnj0nhigc4pu0" path="res://res/player.png" id="2_g2els"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4gyqm"]
+radius = 9.0
+height = 42.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("2_g2els")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("2_g2els")
+region = Rect2(0, 64, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("2_g2els")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("2_g2els")
+region = Rect2(32, 64, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3vyb7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}],
+"loop": 1,
+"name": &"shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2els"]
+bg_color = Color(1, 0.3400427, 0.30407533, 1)
+
+[node name="player" type="CharacterBody2D" unique_id=1054328299]
+script = ExtResource("1_3vyb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1847780091]
+shape = SubResource("CapsuleShape2D_4gyqm")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=951207184]
+
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1822829589]
+position = Vector2(3, -11)
+sprite_frames = SubResource("SpriteFrames_3vyb7")
+animation = &"shoot"
+
+[node name="Bar" type="ProgressBar" parent="." unique_id=1623039402]
+unique_name_in_owner = true
+offset_left = -16.0
+offset_top = -26.0
+offset_right = 15.370371
+offset_bottom = -19.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_g2els")
+value = 50.0
+show_percentage = false

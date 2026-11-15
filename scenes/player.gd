@@ -6,7 +6,7 @@ const BREAD = preload("res://scenes/bread.tscn")
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -600.0
-var health = 200
+var health = 160
 
 var shooting = false
 var bodyType = "player"
@@ -58,7 +58,7 @@ func _check_bounce_tile() -> void:
 		tile_map_layer.press_tile(coords)
 		return
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot") and not Global.has_ended:
+	if event.is_action_pressed("shoot") and not Global.has_ended and not shooting:
 		shoot()
 
 func shoot():
