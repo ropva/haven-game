@@ -14,6 +14,7 @@ var path_i := 0
 var repath_timer := 0.0
 var shooting =  false
 var health = 100;
+var bodyType = "enemy"
 
 @export var player: CharacterBody2D
 
@@ -109,3 +110,7 @@ func shoot():
 	
 func _ready() -> void:
 	$Timer.timeout.connect(shoot)
+
+func enemyTag():
+	#lazy identification meta
+	pass

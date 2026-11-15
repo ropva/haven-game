@@ -25,7 +25,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	timer = timer-delta
 	%TimerLabel.text=str(int(floor(timer/60)))+":"+str(int(fmod(timer,60.0)))
-	if(timer<0):
+	if(timer<0 or Global.has_ended):
 		%CanvasModulate.visible=true;
 		%TimerLabel.visible=false;
 		%EndGameLabel.visible=true;
