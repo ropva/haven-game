@@ -11,6 +11,7 @@ var path: PackedInt64Array = []   # astar node ids
 var path_i := 0
 var repath_timer := 0.0
 var shooting =  false
+var health = 100;
 
 @export var player: CharacterBody2D
 
@@ -26,6 +27,7 @@ func _physics_process(delta: float) -> void:
 	_follow_path()
 	move_and_slide()
 	_check_bounce_tile()   # your existing function
+	$Bar.value = health	
 
 func _cell_here() -> Vector2i:
 	return Global.nav.layer.local_to_map(Global.nav.layer.to_local(global_position + Vector2(0, 8)))
