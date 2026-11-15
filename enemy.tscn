@@ -1,32 +1,32 @@
 [gd_scene format=3 uid="uid://dju5wv2mnvk42"]
 
 [ext_resource type="Script" uid="uid://dhtp3p44g0s2o" path="res://enemy.gd" id="1_4gyqm"]
-[ext_resource type="Texture2D" uid="uid://cnj0nhigc4pu0" path="res://res/player.png" id="2_qi2p4"]
+[ext_resource type="Texture2D" uid="uid://dj8iqucoe0cdt" path="res://res/child.png" id="2_4gyqm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y0iyi"]
-height = 42.0
+height = 28.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
-atlas = ExtResource("2_qi2p4")
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi2p4"]
+atlas = ExtResource("2_4gyqm")
 region = Rect2(0, 0, 32, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
-atlas = ExtResource("2_qi2p4")
+[sub_resource type="AtlasTexture" id="AtlasTexture_iifgy"]
+atlas = ExtResource("2_4gyqm")
 region = Rect2(0, 64, 32, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
-atlas = ExtResource("2_qi2p4")
+[sub_resource type="AtlasTexture" id="AtlasTexture_epg4t"]
+atlas = ExtResource("2_4gyqm")
 region = Rect2(32, 0, 32, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
-atlas = ExtResource("2_qi2p4")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yqyl"]
+atlas = ExtResource("2_4gyqm")
 region = Rect2(32, 64, 32, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3vyb7"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_tbgi4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qhqgy")
+"texture": SubResource("AtlasTexture_qi2p4")
 }],
 "loop": 1,
 "name": &"default",
@@ -34,7 +34,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qlg0r")
+"texture": SubResource("AtlasTexture_iifgy")
 }],
 "loop": 1,
 "name": &"shoot",
@@ -42,14 +42,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g2els")
+"texture": SubResource("AtlasTexture_epg4t")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dqkch")
+"texture": SubResource("AtlasTexture_3yqyl")
 }],
 "loop": 1,
 "name": &"walk",
-"speed": 10.0
+"speed": 5.0
 }]
 
 [node name="enemy" type="CharacterBody2D" unique_id=1054328299]
@@ -59,5 +59,9 @@ script = ExtResource("1_4gyqm")
 shape = SubResource("CapsuleShape2D_y0iyi")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1822829589]
-position = Vector2(0, -2)
-sprite_frames = SubResource("SpriteFrames_3vyb7")
+position = Vector2(3, -18)
+sprite_frames = SubResource("SpriteFrames_tbgi4")
+animation = &"shoot"
+
+[node name="Timer" type="Timer" parent="." unique_id=750249360]
+autostart = true

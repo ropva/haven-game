@@ -12,6 +12,10 @@ func _ready() -> void:
 		pass
 	)
 	Global.nav.build($TileMapLayer, 300, 600, -600)
+	
+	$enemy.shoot_bread.connect(func(b): 
+		add_child(b)
+	)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

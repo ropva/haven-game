@@ -2,20 +2,20 @@ extends CharacterBody2D
 
 @export var tile_map_layer: TileMapLayer
 
+const BREAD = preload("res://scenes/evil_bread.tscn")
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
 const GRAVITY = 600.0
-var nav: EnemyNav
 var path: PackedInt64Array = []   # astar node ids
 var path_i := 0
 var repath_timer := 0.0
+var shooting =  false
 
 @export var player: CharacterBody2D
 
-func setup(n: EnemyNav, layer: TileMapLayer, p: CharacterBody2D) -> void:
-	nav = n
-	tile_map_layer = layer   # used by your existing _check_bounce_tile()
-	player = p
+signal shoot_bread
+
 
 func _physics_process(delta: float) -> void:
 	velocity.y += GRAVITY * delta
@@ -43,17 +43,21 @@ func _follow_path() -> void:
 	if path_i >= path.size():
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		return
+
 	var target_pos := Global.nav.astar.get_point_position(path[path_i])
 	var dx := target_pos.x - global_position.x
 
-	if absf(dx) < 4.0 and is_on_floor():
-		path_i += 1            # reached this node, go to the next
-		return
+	if is_on_floor():
+		if absf(dx) < 4.0:
+			path_i += 1          # arrived at this node
+			return
+	else:
+		# airborne: keep heading toward the landing node, stop when above it
+		if absf(dx) < 4.0:
+			velocity.x = 0.0
+			return
 
-	# Pad edge: walk onto the pad; bounce triggers in _check_bounce_tile().
-	# In the air, keep steering toward the landing node.
-	var dir := signf(dx)
-	velocity.x = dir * SPEED
+	velocity.x = signf(dx) * SPEED
 	
 func _check_bounce_tile() -> void:
 	var feet := global_position + Vector2(0, 8)
@@ -62,6 +66,7 @@ func _check_bounce_tile() -> void:
 	if data and data.get_custom_data("bouncy"):
 		velocity.y = JUMP_VELOCITY*float(data.get_custom_data("bounce_mult"))
 		tile_map_layer.press_tile(coords)
+		_on_bounced(coords)          # <-- added
 		return
 	var head := global_position - Vector2(0, 8)
 	coords = tile_map_layer.local_to_map(tile_map_layer.to_local(head))
@@ -69,5 +74,28 @@ func _check_bounce_tile() -> void:
 	if data and data.get_custom_data("bouncy"):
 		velocity.y = JUMP_VELOCITY*float(data.get_custom_data("bounce_mult"))
 		tile_map_layer.press_tile(coords)
+		_on_bounced(coords)          # <-- added
 		return
+	
+func _on_bounced(coords: Vector2i) -> void:
+	if not Global.nav.id_of.has(coords):
+		return
+	var pad_id: int = Global.nav.id_of[coords]
+	var k := path.find(pad_id)
+	if k != -1 and k + 1 < path.size():
+		path_i = k + 1    # skip the pad node, target the landing node
 		
+func shoot():
+	shooting = true
+	var new_bread: CharacterBody2D = BREAD.instantiate()
+	new_bread.tile_map_layer = tile_map_layer
+	shoot_bread.emit(new_bread)
+	new_bread.global_position = global_position + Vector2()
+	$sprite.play("shoot")
+	$sprite.animation_looped.connect(
+		func():
+			shooting = false
+	)
+	
+func _ready() -> void:
+	$Timer.timeout.connect(shoot)
