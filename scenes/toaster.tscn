@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://ru2gv52b2xff"]
+
+[ext_resource type="Script" uid="uid://b1x6hcl6y66v4" path="res://scenes/toaster.gd" id="1_n3rle"]
+[ext_resource type="Texture2D" uid="uid://bbqvaydk2llwr" path="res://res/toaster.png" id="2_n3rle"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4yda"]
+size = Vector2(32, 25)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gyqm"]
+bg_color = Color(1, 0.3400427, 0.30407533, 1)
+
+[node name="enemy" type="CharacterBody2D" unique_id=1054328299]
+collision_layer = 2
+collision_mask = 10
+script = ExtResource("1_n3rle")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1847780091]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_w4yda")
+
+[node name="Timer" type="Timer" parent="." unique_id=750249360]
+wait_time = 2.0
+autostart = true
+
+[node name="Bar" type="ProgressBar" parent="." unique_id=493720708]
+unique_name_in_owner = true
+offset_left = -16.0
+offset_top = -26.0
+offset_right = 15.370371
+offset_bottom = -19.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_4gyqm")
+value = 50.0
+show_percentage = false
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=491173906]
+texture = ExtResource("2_n3rle")
