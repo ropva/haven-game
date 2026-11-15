@@ -7,6 +7,8 @@ const BREAD = preload("res://scenes/bread.tscn")
 const SPEED = 400.0
 const JUMP_VELOCITY = -600.0
 
+var shooting = false
+
 signal shoot_bread
 signal jump_pad_activated
 
@@ -24,8 +26,12 @@ func _physics_process(delta: float) -> void:
 	var direction = 0 if(Global.has_ended) else Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED
+		if not shooting: $sprite.play("walk")
+		$sprite.flip_h = direction < 0
+		
 	else:
 		velocity.x = velocity.x * 0.7 if is_on_floor() else velocity.x * 0.99
+		if not shooting: $sprite.play("default")
 
 	move_and_slide()
 	
@@ -51,7 +57,13 @@ func _input(event: InputEvent) -> void:
 		shoot()
 
 func shoot():
+	shooting = true
 	var new_bread: CharacterBody2D = BREAD.instantiate()
 	new_bread.tile_map_layer = tile_map_layer
 	shoot_bread.emit(new_bread)
 	new_bread.global_position = global_position + Vector2()
+	$sprite.play("shoot")
+	$sprite.animation_looped.connect(
+		func():
+			shooting = false
+	)
