@@ -34,7 +34,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_qlg0r")
 }],
 "loop": 1,
@@ -54,7 +54,18 @@ animations = [{
 }]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2els"]
-bg_color = Color(1, 0.3400427, 0.30407533, 1)
+bg_color = Color(0, 0, 0, 0.68235296)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qhqgy"]
+bg_color = Color(0.17932507, 0.7218265, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [node name="player" type="CharacterBody2D" unique_id=1054328299]
 script = ExtResource("1_3vyb7")
@@ -75,6 +86,7 @@ offset_left = -16.0
 offset_top = -26.0
 offset_right = 15.370371
 offset_bottom = -19.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_g2els")
+theme_override_styles/background = SubResource("StyleBoxFlat_g2els")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qhqgy")
 value = 50.0
 show_percentage = false
