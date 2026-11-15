@@ -5,6 +5,8 @@ extends CharacterBody2D
 const BREAD = preload("res://scenes/evil_bread.tscn")
 
 const SPEED = 300.0
+const GROUND_ACCEL = 2000.0
+const AIR_ACCEL = 1000.0
 const JUMP_VELOCITY = -600.0
 const GRAVITY = 600.0
 var path: PackedInt64Array = []   # astar node ids
@@ -40,26 +42,32 @@ func _repath() -> void:
 	var b := Global.nav.astar.get_closest_point(Global.nav.layer.map_to_local(to_cell))
 	path = Global.nav.astar.get_id_path(a, b)
 	path_i = 1 if path.size() > 1 else 0
-
 func _follow_path() -> void:
+	var delta := get_physics_process_delta_time()
+	var on_floor := is_on_floor()
+	var accel := GROUND_ACCEL if on_floor else AIR_ACCEL
+
 	if path_i >= path.size():
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0.0, accel * delta)
 		return
 
 	var target_pos := Global.nav.astar.get_point_position(path[path_i])
 	var dx := target_pos.x - global_position.x
 
-	if is_on_floor():
-		if absf(dx) < 4.0:
-			path_i += 1          # arrived at this node
-			return
-	else:
-		# airborne: keep heading toward the landing node, stop when above it
-		if absf(dx) < 4.0:
-			velocity.x = 0.0
-			return
+	if on_floor and absf(dx) < 4.0:
+		path_i += 1
+		return
 
-	velocity.x = signf(dx) * SPEED
+	# Fastest speed from which we can still stop at the target.
+	# 0.7 is a safety factor so we never need more braking than we have.
+	var max_speed := sqrt(2.0 * accel * 0.7 * absf(dx))
+	var desired := signf(dx) * minf(SPEED, max_speed)
+
+	# Close enough in the air: hold still instead of hunting
+	if not on_floor and absf(dx) < 3.0:
+		desired = 0.0
+
+	velocity.x = move_toward(velocity.x, desired, accel * delta)
 	
 func _check_bounce_tile() -> void:
 	var feet := global_position + Vector2(0, 8)
