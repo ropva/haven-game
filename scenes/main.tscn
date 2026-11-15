@@ -42,13 +42,20 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EndGameLabel" type="Label" parent="CanvasLayer/CenterContainer2" unique_id=1702969597]
+[node name="WinGameLabel" type="Label" parent="CanvasLayer/CenterContainer2" unique_id=1702969597]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "You like won or lost idk
-something about bread"
+text = "YOU WIN"
+horizontal_alignment = 1
+
+[node name="LoseGameLabel" type="Label" parent="CanvasLayer/CenterContainer2" unique_id=1177139165]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "YOU LOSE"
 horizontal_alignment = 1
 
 [node name="BackgroundLayer" type="TileMapLayer" parent="." unique_id=365899869]
@@ -72,40 +79,40 @@ color = Color(0.32915878, 0.32915825, 0.32915848, 1)
 
 [node name="enemy" parent="." unique_id=1948771556 node_paths=PackedStringArray("tile_map_layer", "player") instance=ExtResource("5_tbgi4")]
 position = Vector2(360, -12)
-collision_layer = 0
+collision_layer = 2
+collision_mask = 10
 tile_map_layer = NodePath("../TileMapLayer")
 player = NodePath("../player")
 
 [node name="enemy2" parent="." unique_id=1336265859 node_paths=PackedStringArray("tile_map_layer", "player") instance=ExtResource("5_tbgi4")]
 position = Vector2(587.5, -134.5)
-collision_layer = 0
+collision_layer = 2
+collision_mask = 10
 tile_map_layer = NodePath("../TileMapLayer")
 player = NodePath("../player")
 
 [node name="enemy3" parent="." unique_id=1427535225 node_paths=PackedStringArray("tile_map_layer", "player") instance=ExtResource("5_tbgi4")]
 position = Vector2(201, -135)
-collision_layer = 0
+collision_layer = 2
+collision_mask = 10
 tile_map_layer = NodePath("../TileMapLayer")
 player = NodePath("../player")
 
 [node name="enemy4" parent="." unique_id=180647840 node_paths=PackedStringArray("tile_map_layer", "player") instance=ExtResource("5_tbgi4")]
 position = Vector2(806.5, 38.5)
-collision_layer = 0
+collision_layer = 2
+collision_mask = 10
 tile_map_layer = NodePath("../TileMapLayer")
 player = NodePath("../player")
 
 [node name="enemy5" parent="." unique_id=297378152 node_paths=PackedStringArray("tile_map_layer", "player") instance=ExtResource("5_tbgi4")]
 position = Vector2(-115, -102)
-collision_layer = 0
+collision_layer = 2
+collision_mask = 10
 tile_map_layer = NodePath("../TileMapLayer")
 player = NodePath("../player")
 
 [node name="enemy6" parent="." unique_id=872025498 node_paths=PackedStringArray("tile_map_layer", "player") instance=ExtResource("6_tefeu")]
 position = Vector2(1071.5, 34)
-tile_map_layer = NodePath("../TileMapLayer")
-player = NodePath("../player")
-
-[node name="enemy7" parent="." unique_id=1708763424 node_paths=PackedStringArray("tile_map_layer", "player") instance=ExtResource("6_tefeu")]
-position = Vector2(-322, -185.5)
 tile_map_layer = NodePath("../TileMapLayer")
 player = NodePath("../player")

@@ -2,9 +2,15 @@ extends Node2D
 # In seconds
 var timer = 5 * 60 
 
-
+var enemies: Array[Node2D] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	enemies = [$enemy,
+$enemy2,
+$enemy3,
+$enemy4,
+$enemy5,
+$enemy6]
 	%player.shoot_bread.connect(func(b): 
 		add_child(b)
 	)
@@ -13,27 +19,11 @@ func _ready() -> void:
 	)
 	Global.nav.build($TileMapLayer, 300, 600, -600)
 	
-	$enemy.shoot_bread.connect(func(b): 
-		add_child(b)
-	)
-	$enemy2.shoot_bread.connect(func(b): 
-		add_child(b)
-	)
-	$enemy3.shoot_bread.connect(func(b): 
-		add_child(b)
-	)
-	$enemy4.shoot_bread.connect(func(b): 
-		add_child(b)
-	)
-	$enemy5.shoot_bread.connect(func(b): 
-		add_child(b)
-	)
-	$enemy6.shoot_bread.connect(func(b): 
-		add_child(b)
-	)
-	$enemy7.shoot_bread.connect(func(b): 
-		add_child(b)
-	)
+	for enemy in enemies:
+		enemy.shoot_bread.connect(func(b): 
+			add_child(b)
+		)
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,8 +33,12 @@ func _process(delta: float) -> void:
 	if(timer<0 or Global.has_ended):
 		%CanvasModulate.visible=true;
 		%TimerLabel.visible=false;
-		%EndGameLabel.visible=true;
+		if Global.win_state: %WinGameLabel.visible=true;
+		else: %LoseGameLabel.visible=true;
 		Global.has_ended=true;
 	pass
 	
+	if enemies.all(func(e): return not is_instance_valid(e)):
+		Global.has_ended = true
+		Global.win_state = true
 	

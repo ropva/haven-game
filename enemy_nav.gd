@@ -3,14 +3,14 @@ extends RefCounted
 
 enum Edge { WALK, FALL, PAD }
 
-const MAX_DROP := 10          # max cells an enemy may fall on purpose
+const MAX_DROP := 10         
 const SIM_DT := 1.0 / 60.0
 
 var layer: TileMapLayer
 var astar := AStar2D.new()
-var id_of: Dictionary = {}    # Vector2i -> int
+var id_of: Dictionary = {}   
 var cell_of: Dictionary = {}  # int -> Vector2i
-var edge_info: Dictionary = {} # Vector2i(from_id, to_id) -> {type, dir}
+var edge_info: Dictionary = {} 
 
 var speed: float
 var gravity: float
@@ -36,7 +36,6 @@ func build(l: TileMapLayer, spd: float, grav: float, jump_v: float) -> void:
 
 	# 1) nodes
 	for c in layer.get_used_cells():
-		# candidates: the cell above every used cell, plus pads themselves
 		for cand in [c + Vector2i.UP, c]:
 			if not id_of.has(cand) and _standable(cand):
 				var id := astar.get_available_point_id()
@@ -89,11 +88,10 @@ func _add_pad_edges(pad_id: int, pad_cell: Vector2i) -> void:
 func _simulate_launch(pad_cell: Vector2i, dir: int, vy: float) -> Vector2i:
 	var pos := layer.map_to_local(pad_cell)
 	var vel := Vector2(dir * speed, vy)
-	for i in 600:  # ~10 seconds max
+	for i in 600:
 		vel.y += gravity * SIM_DT
 		var next := pos + vel * SIM_DT
 		var next_cell := layer.local_to_map(next)
-		# wall: kill horizontal movement
 		if _is_solid(layer.local_to_map(Vector2(next.x, pos.y))):
 			vel.x = 0.0
 			next.x = pos.x
