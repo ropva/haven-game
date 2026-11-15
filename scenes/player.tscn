@@ -34,7 +34,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 3.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_qlg0r")
 }],
 "loop": 1,
