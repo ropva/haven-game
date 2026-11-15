@@ -70,6 +70,11 @@ visible = false
 color = Color(0.32915878, 0.32915825, 0.32915848, 1)
 
 [node name="enemy" parent="." unique_id=1948771556 node_paths=PackedStringArray("tile_map_layer", "player") instance=ExtResource("5_tbgi4")]
-position = Vector2(409.5, 1.5)
+position = Vector2(360, -12)
+tile_map_layer = NodePath("../TileMapLayer")
+player = NodePath("../player")
+
+[node name="enemy2" parent="." unique_id=1336265859 node_paths=PackedStringArray("tile_map_layer", "player") instance=ExtResource("5_tbgi4")]
+position = Vector2(959, -285)
 tile_map_layer = NodePath("../TileMapLayer")
 player = NodePath("../player")
